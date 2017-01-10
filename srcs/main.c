@@ -6,12 +6,12 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:42:16 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/09 16:33:15 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/10 15:49:04 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/include.h"
-
+/*
 int		main(int argc, char **argv)
 {
 	DIR		*lol;
@@ -36,5 +36,27 @@ int		main(int argc, char **argv)
 		}
 	}
 
+	return (0);
+}
+
+*/
+
+static int		get_arg(t_ls *ls, int ac, char **av)
+{
+	int		i;
+
+	i = 1;
+	while (i < ac)
+	{
+		
+	}
+	return (_SUCCESS_);
+}
+
+int		main(int argc, char **argv)
+{
+	t_ls	data;
+
+	get_arg(&data);
 	return (0);
 }
