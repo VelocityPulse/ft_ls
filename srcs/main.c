@@ -6,7 +6,7 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:42:16 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/11 00:17:43 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/11 00:53:40 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,16 @@ int		main(int argc, char **argv)
 }
 */
 
-static void		init_data(t_ls *ls)
+static void		init_data(t_ls *data)
 {
-	ls->flag_l = false;
-	ls->flag_rec = false;
-	ls->flag_rev = false;
-	ls->flag_t = false;
-	ls->paths = NULL;
+	data->flag_l = false;
+	data->flag_rec = false;
+	data->flag_rev = false;
+	data->flag_t = false;
+	data->paths = NULL;
 }
 
-static void		get_flags(t_ls *ls, char *str)
+static void		get_flags(t_ls *data, char *str)
 {
 	int		i;
 
@@ -56,13 +56,13 @@ static void		get_flags(t_ls *ls, char *str)
 	while (str[++i])
 	{
 		if (str[i] == 'l')
-			ls->flag_l = true;
+			data->flag_l = true;
 		else if (str[i] == 'R')
-			ls->flag_rec = true;
+			data->flag_rec = true;
 		else if (str[i] == 'r')
-			ls->flag_rev = true;
+			data->flag_rev = true;
 		else if (str[i] == 't')
-			ls->flag_t = true;
+			data->flag_t = true;
 		else
 		{
 			ft_printf("ft_ls: illegal option -- %c\n", str[i]);
@@ -93,18 +93,15 @@ static void		add_path(t_path **paths, char *str)
 	}
 }
 
-static int		get_arg(t_ls *ls, int ac, char **av)
+static void		get_arg(t_ls *data, int ac, char **av)
 {
 	int		i;
 
 	i = 1;
 	while (i < ac && av[i][0] == '-' && av[i][1])
-		get_flags(ls, &av[i++][1]);
+		get_flags(data, &av[i++][1]);
 	while (i < ac)
-		add_path(&ls->paths, av[i++]);
-	if (ls->paths == NULL)
-		add_path(&ls->paths, ".");
-	return (_SUCCESS_);
+		add_path(&data->paths, av[i++]);
 }
 
 int		main(int argc, char **argv)
@@ -113,5 +110,6 @@ int		main(int argc, char **argv)
 
 	init_data(&data);
 	get_arg(&data, argc, argv);
+	display(&data);
 	return (0);
 }
