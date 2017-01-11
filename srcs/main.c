@@ -6,11 +6,13 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:42:16 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/11 00:53:40 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/11 03:34:40 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/include.h"
+
+
 /*
 int		main(int argc, char **argv)
 {
@@ -39,13 +41,16 @@ int		main(int argc, char **argv)
 }
 */
 
+
+
 static void		init_data(t_ls *data)
 {
 	data->flag_l = false;
 	data->flag_rec = false;
 	data->flag_rev = false;
 	data->flag_t = false;
-	data->paths = NULL;
+	data->lpaths = NULL;
+	data->curr_path = NULL;
 }
 
 static void		get_flags(t_ls *data, char *str)
@@ -101,7 +106,9 @@ static void		get_arg(t_ls *data, int ac, char **av)
 	while (i < ac && av[i][0] == '-' && av[i][1])
 		get_flags(data, &av[i++][1]);
 	while (i < ac)
-		add_path(&data->paths, av[i++]);
+		add_path(&data->lpaths, av[i++]);
+	if (!data->lpaths)
+		add_path(&data->lpaths, ".");
 }
 
 int		main(int argc, char **argv)

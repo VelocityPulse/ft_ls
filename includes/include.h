@@ -6,7 +6,7 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:42:29 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/11 00:51:26 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/11 03:34:00 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,17 @@ typedef struct	s_ls
 	t_bool		flag_rec;
 	t_bool		flag_rev;
 	t_bool		flag_t;
-	t_path		*paths;
+	t_path		*lpaths;
+	t_path		*curr_path;
 }				t_ls;
 
-void	ls_exit(char *str);
-void	display(t_ls *data);
+void			ls_exit(char *str);
+void			display(t_ls *data);
+
+/*
+** TOOLS
+*/
+
+char			*get_parent(char *path);
 
 #endif

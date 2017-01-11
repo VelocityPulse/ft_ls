@@ -6,7 +6,7 @@
 #    By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/09 12:41:58 by cchameyr          #+#    #+#              #
-#    Updated: 2017/01/11 02:16:55 by cchameyr         ###   ########.fr        #
+#    Updated: 2017/01/11 02:54:27 by cchameyr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME =			ft_ls
 
 FILES =			main.c \
 				exit.c \
+				tools.c \
 				display.c
 
 SRCS =			$(addprefix srcs/, $(FILES))
