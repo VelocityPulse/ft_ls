@@ -6,7 +6,7 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:42:16 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/11 03:34:40 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/11 06:45:47 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static void		init_data(t_ls *data)
 	data->flag_rev = false;
 	data->flag_t = false;
 	data->lpaths = NULL;
-	data->curr_path = NULL;
 }
 
 static void		get_flags(t_ls *data, char *str)
