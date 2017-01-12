@@ -6,7 +6,7 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:42:29 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/11 06:19:23 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/12 19:15:28 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,22 @@
 
 #include "debug.h"
 
+//typedef DIR				t_dir;
+typedef struct dirent	t_dirent;
+
 typedef struct	s_path
 {
 	char			*path;
 	struct s_path	*next;
 }				t_path;
+
+typedef struct	s_listent
+{
+	struct dirent		*dirent;
+	char				*name;
+	struct s_listent	*next;
+	struct s_listent	*back;
+}				t_listent;
 
 typedef struct	s_ls
 {
@@ -42,9 +53,16 @@ void			ls_exit(char *str);
 void			display(t_ls *data);
 
 /*
+** LISTS
+*/
+
+void			add_listent(t_listent **list, t_dirent *curr_ent);
+
+/*
 ** TOOLS
 */
 
 char			*get_parent(char *path);
+char			*ft_strjoin_dir(char *s1, char *s2);
 
 #endif
