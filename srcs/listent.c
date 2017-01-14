@@ -6,7 +6,7 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 18:39:50 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/12 18:50:29 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/14 15:24:33 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,22 @@ void	add_listent(t_listent **begin, t_dirent *curr_ent)
 		l = *begin;
 		while (l->next)
 			l = l->next;
-		l->next = ft_memalloc(sizeof(t_dirent));
+		l->next = (t_listent *)ft_memalloc(sizeof(t_listent));
 		l->next->back = l;
 		l = l->next;
 		l->next = NULL;
 		l->dirent = curr_ent;
-		l->name = curr_ent->d_name;
+		l->name = ft_strdup(curr_ent->d_name);
 	}
 	else
 	{
-		*begin = ft_memalloc(sizeof(t_dirent));
+		*begin = (t_listent *)ft_memalloc(sizeof(t_listent));
 		l = *begin;
 		l->next = NULL;
 		l->back = NULL;
 		l->dirent = curr_ent;
-		l->name = curr_ent->d_name;
+		// ici copier juste le type et le name pour regler le probleme
+		// des pertes de donnees
+		l->name = ft_strdup(curr_ent->d_name);
 	}
 }

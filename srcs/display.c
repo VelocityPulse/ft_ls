@@ -6,7 +6,7 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 06:16:24 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/14 13:21:59 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/14 15:14:47 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ void	recursive(t_ls *data, char *path)
 	{
 		while ((curr_ent = readdir(curr_dir)))
 		{
-
-			ft_printf("name : |%s|\n", curr_ent->d_name);
+//			ft_printf("name : |%s|\n", curr_ent->d_name);
 			add_listent(&list_ent, curr_ent);
 			//display_curr
 //			ft_putendl(curr_ent->d_name);
@@ -65,6 +64,9 @@ void	recursive(t_ls *data, char *path)
 		tmp = list_ent;
 		while (tmp)
 		{
+			ft_printf("name2 : |%s|\n", tmp->dirent->d_name);
+
+
 			(void)join;
 /*			if (tmp->dirent->d_type == DT_DIR)
 			{
@@ -78,6 +80,7 @@ void	recursive(t_ls *data, char *path)
 			}
 */			tmp = tmp->next;
 		}
+		exit(0);
 	}
 	//free list_ent
 	//closedir list_ent blabla

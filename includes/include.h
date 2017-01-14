@@ -6,7 +6,7 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:42:29 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/12 19:15:28 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/14 14:25:34 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct	s_path
 
 typedef struct	s_listent
 {
-	struct dirent		*dirent;
+	t_dirent			*dirent;
 	char				*name;
 	struct s_listent	*next;
 	struct s_listent	*back;
