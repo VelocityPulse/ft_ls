@@ -6,7 +6,7 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 06:16:24 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/12 19:20:12 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/14 13:21:59 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ void	read_not_dir(t_ls *data, char *path, char *name)
 	}
 	//stat patati pampata :3
 	//ajouter dans des list chaine bref bref :3
-/*	if (path == name)
+		if (path == name)
 		ft_putendl(curr_ent->d_name);
-	else
+		else
 		ft_printf("%s/%s\n", path, curr_ent->d_name);
-*/	(void)data;
+			(void)data;
 }
 
 void	recursive(t_ls *data, char *path)
@@ -54,32 +54,33 @@ void	recursive(t_ls *data, char *path)
 		read_not_dir(data, path, ft_strrchr(path, '/'));
 	else
 	{
-//		ft_printf("is a folder\n");
 		while ((curr_ent = readdir(curr_dir)))
 		{
+
+			ft_printf("name : |%s|\n", curr_ent->d_name);
 			add_listent(&list_ent, curr_ent);
-			ft_putendl(curr_ent->d_name);
+			//display_curr
+//			ft_putendl(curr_ent->d_name);
 		}
 		tmp = list_ent;
 		while (tmp)
 		{
-			ft_putendl(tmp->name);
-			tmp = tmp->next;
-		}
-		tmp = list_ent;
-		while (tmp)
-		{
-			if (tmp->dirent->d_type == DT_DIR)
+			(void)join;
+/*			if (tmp->dirent->d_type == DT_DIR)
 			{
-				join = ft_strjoin(path, tmp->name);
-				ft_printf("%s:\n", join);
-				exit(1);
-				recursive(data, join);
-				ft_memdel((void **)&join);
+				if (ft_strcmp(tmp->name, ".") && ft_strcmp(tmp->name, ".."))
+				{
+					join = ft_strjoin_dir(path, tmp->name);
+					ft_printf("\n%s:\n", join);
+					recursive(data, join);
+					ft_memdel((void **)&join);
+				}
 			}
-			tmp = tmp->next;
+*/			tmp = tmp->next;
 		}
 	}
+	//free list_ent
+	//closedir list_ent blabla
 
 }
 
