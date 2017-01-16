@@ -6,7 +6,7 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 18:39:50 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/14 15:24:33 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/16 16:52:53 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	add_listent(t_listent **begin, t_dirent *curr_ent)
 {
 	t_listent	*l;
 
+
+// les placer dans ordre ASCII name
 	if (*begin)
 	{
 		l = *begin;
@@ -26,6 +28,7 @@ void	add_listent(t_listent **begin, t_dirent *curr_ent)
 		l = l->next;
 		l->next = NULL;
 		l->dirent = curr_ent;
+		l->type = curr_ent->d_type;
 		l->name = ft_strdup(curr_ent->d_name);
 	}
 	else
@@ -35,8 +38,25 @@ void	add_listent(t_listent **begin, t_dirent *curr_ent)
 		l->next = NULL;
 		l->back = NULL;
 		l->dirent = curr_ent;
-		// ici copier juste le type et le name pour regler le probleme
-		// des pertes de donnees
+		l->type = curr_ent->d_type;
 		l->name = ft_strdup(curr_ent->d_name);
 	}
+}
+
+void	free_listent(t_listent **begin)
+{
+	t_listent	*l;
+
+	if (*begin)
+	{
+		l = *begin;
+		while (l)
+		{
+			*begin = l->next;
+			ft_memdel((void **)&l->name);
+			ft_memdel((void **)&l);
+			l = *begin;
+		}
+	}
+	*begin = NULL;
 }

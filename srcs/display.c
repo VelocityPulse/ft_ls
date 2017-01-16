@@ -6,7 +6,7 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 06:16:24 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/14 15:14:47 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/16 17:38:28 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ void	read_not_dir(t_ls *data, char *path, char *name)
 	}
 	//stat patati pampata :3
 	//ajouter dans des list chaine bref bref :3
-		if (path == name)
+	if (path == name)
 		ft_putendl(curr_ent->d_name);
-		else
+	else
 		ft_printf("%s/%s\n", path, curr_ent->d_name);
-			(void)data;
+	(void)data;
 }
 
 void	recursive(t_ls *data, char *path)
@@ -48,6 +48,9 @@ void	recursive(t_ls *data, char *path)
 	t_listent		*list_ent;
 	t_listent		*tmp;
 	char			*join;
+	static int		folder = 0;
+	static int		not_dir = 0;
+
 
 	list_ent = NULL;
 	if (!(curr_dir = opendir(path)))
@@ -56,35 +59,36 @@ void	recursive(t_ls *data, char *path)
 	{
 		while ((curr_ent = readdir(curr_dir)))
 		{
-//			ft_printf("name : |%s|\n", curr_ent->d_name);
 			add_listent(&list_ent, curr_ent);
+			if (ft_strncmp(curr_ent->d_name, ".", 1) && ft_strncmp(curr_ent->d_name, "..", 2))
+				ft_putendl(curr_ent->d_name);
 			//display_curr
-//			ft_putendl(curr_ent->d_name);
 		}
 		tmp = list_ent;
 		while (tmp)
 		{
-			ft_printf("name2 : |%s|\n", tmp->dirent->d_name);
-
-
-			(void)join;
-/*			if (tmp->dirent->d_type == DT_DIR)
+			if (tmp->type == DT_DIR)
 			{
-				if (ft_strcmp(tmp->name, ".") && ft_strcmp(tmp->name, ".."))
+				if (ft_strncmp(tmp->name, ".", 2) && ft_strncmp(tmp->name, "..", 3))
+					// obligatoire pour pas avoir de boucle infini
 				{
-					join = ft_strjoin_dir(path, tmp->name);
-					ft_printf("\n%s:\n", join);
-					recursive(data, join);
-					ft_memdel((void **)&join);
+					if (ft_strncmp(tmp->name, ".", 1) && ft_strncmp(tmp->name, "..", 2))
+					{
+						// necessaire pour pas afficher les fichers caches
+						join = ft_strjoin_dir(path, tmp->name);
+						ft_printf("\n%s:\n", join);
+						recursive(data, join);
+						ft_memdel((void **)&join);
+					}
 				}
 			}
-*/			tmp = tmp->next;
+			tmp = tmp->next;
 		}
-		exit(0);
+		closedir(curr_dir);
+		free_listent(&list_ent);
 	}
 	//free list_ent
 	//closedir list_ent blabla
-
 }
 
 void	display(t_ls *data)

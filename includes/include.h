@@ -6,7 +6,7 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:42:29 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/14 14:25:34 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/16 16:52:19 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct	s_listent
 {
 	t_dirent			*dirent;
 	char				*name;
+	int					type;
 	struct s_listent	*next;
 	struct s_listent	*back;
 }				t_listent;
@@ -57,6 +58,7 @@ void			display(t_ls *data);
 */
 
 void			add_listent(t_listent **list, t_dirent *curr_ent);
+void			free_listent(t_listent **list);
 
 /*
 ** TOOLS
