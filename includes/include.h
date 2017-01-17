@@ -6,7 +6,7 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:42:29 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/16 16:52:19 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/17 15:44:31 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct	s_ls
 	t_bool		flag_rec;
 	t_bool		flag_rev;
 	t_bool		flag_t;
+	t_bool		flag_a;
 	t_path		*lpaths;
 }				t_ls;
 

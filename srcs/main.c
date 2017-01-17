@@ -6,7 +6,7 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:42:16 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/11 06:45:47 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/17 16:04:55 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static void		init_data(t_ls *data)
 	data->flag_rec = false;
 	data->flag_rev = false;
 	data->flag_t = false;
+	data->flag_a = false;
 	data->lpaths = NULL;
 }
 
@@ -67,6 +68,8 @@ static void		get_flags(t_ls *data, char *str)
 			data->flag_rev = true;
 		else if (str[i] == 't')
 			data->flag_t = true;
+		else if (str[i] == 'a')
+			data->flag_a = true;
 		else
 		{
 			ft_printf("ft_ls: illegal option -- %c\n", str[i]);
