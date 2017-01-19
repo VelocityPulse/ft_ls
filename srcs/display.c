@@ -6,7 +6,7 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 06:16:24 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/16 17:38:28 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/19 15:04:06 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,6 @@ void	recursive(t_ls *data, char *path)
 	t_listent		*list_ent;
 	t_listent		*tmp;
 	char			*join;
-	static int		folder = 0;
-	static int		not_dir = 0;
-
 
 	list_ent = NULL;
 	if (!(curr_dir = opendir(path)))
@@ -58,12 +55,13 @@ void	recursive(t_ls *data, char *path)
 	else
 	{
 		while ((curr_ent = readdir(curr_dir)))
-		{
-			add_listent(&list_ent, curr_ent);
-			if (ft_strncmp(curr_ent->d_name, ".", 1) && ft_strncmp(curr_ent->d_name, "..", 2))
+			if (data->flag_a ||
+					(!data->flag_a && ft_strncmp(curr_ent->d_name, ".", 1)))
+			{
+				add_listent(&list_ent, curr_ent);
 				ft_putendl(curr_ent->d_name);
-			//display_curr
-		}
+			}
+		// display le tout
 		tmp = list_ent;
 		while (tmp)
 		{
@@ -72,14 +70,11 @@ void	recursive(t_ls *data, char *path)
 				if (ft_strncmp(tmp->name, ".", 2) && ft_strncmp(tmp->name, "..", 3))
 					// obligatoire pour pas avoir de boucle infini
 				{
-					if (ft_strncmp(tmp->name, ".", 1) && ft_strncmp(tmp->name, "..", 2))
-					{
-						// necessaire pour pas afficher les fichers caches
 						join = ft_strjoin_dir(path, tmp->name);
+						ft_printf("%s\n", join);
 						ft_printf("\n%s:\n", join);
 						recursive(data, join);
 						ft_memdel((void **)&join);
-					}
 				}
 			}
 			tmp = tmp->next;
@@ -87,8 +82,6 @@ void	recursive(t_ls *data, char *path)
 		closedir(curr_dir);
 		free_listent(&list_ent);
 	}
-	//free list_ent
-	//closedir list_ent blabla
 }
 
 void	display(t_ls *data)
