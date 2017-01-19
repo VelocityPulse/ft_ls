@@ -6,7 +6,7 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 18:39:50 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/17 15:54:15 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/19 16:01:26 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	add_listent(t_listent **begin, t_dirent *curr_ent)
 		l->next->back = l;
 		l = l->next;
 		l->next = NULL;
-		l->dirent = curr_ent; // peut etre a virer
 		l->type = curr_ent->d_type;
 		l->name = ft_strdup(curr_ent->d_name);
 	}
@@ -36,7 +35,6 @@ void	add_listent(t_listent **begin, t_dirent *curr_ent)
 		l = *begin;
 		l->next = NULL;
 		l->back = NULL;
-		l->dirent = curr_ent; // peut etre a virer
 		l->type = curr_ent->d_type;
 		l->name = ft_strdup(curr_ent->d_name);
 	}
