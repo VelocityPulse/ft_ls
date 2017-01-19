@@ -6,7 +6,7 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 06:16:24 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/19 15:04:06 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/19 16:05:31 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	recursive(t_ls *data, char *path)
 					// obligatoire pour pas avoir de boucle infini
 				{
 						join = ft_strjoin_dir(path, tmp->name);
-						ft_printf("%s\n", join);
 						ft_printf("\n%s:\n", join);
 						recursive(data, join);
 						ft_memdel((void **)&join);

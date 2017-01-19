@@ -6,11 +6,23 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 18:39:50 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/19 16:01:26 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/19 16:05:11 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/include.h"
+
+static t_listent	*new_listent(t_listent *current, t_dirent *curr_entry)
+{
+	t_listent	*list;
+
+	list = (t_listent *)ft_memalloc(sizeof(t_listent));
+	list->next = NULL;
+	list->type = curr_entry->d_type;
+	list->name = ft_strdup(curr_entry->d_name);
+	list->back = current;
+	return (list);
+}
 
 void	add_listent(t_listent **begin, t_dirent *curr_ent)
 {
@@ -22,22 +34,11 @@ void	add_listent(t_listent **begin, t_dirent *curr_ent)
 		l = *begin;
 		while (l->next)
 			l = l->next;
-		l->next = (t_listent *)ft_memalloc(sizeof(t_listent));
-		l->next->back = l;
+		l->next = new_listent(l, curr_ent);
 		l = l->next;
-		l->next = NULL;
-		l->type = curr_ent->d_type;
-		l->name = ft_strdup(curr_ent->d_name);
 	}
 	else
-	{
-		*begin = (t_listent *)ft_memalloc(sizeof(t_listent));
-		l = *begin;
-		l->next = NULL;
-		l->back = NULL;
-		l->type = curr_ent->d_type;
-		l->name = ft_strdup(curr_ent->d_name);
-	}
+		*begin = new_listent(NULL, curr_ent);
 }
 
 void	free_listent(t_listent **begin)
