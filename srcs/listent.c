@@ -6,7 +6,7 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 18:39:50 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/20 14:54:50 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/20 17:24:42 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,31 +32,53 @@ void	display_list(t_listent *list)
 		ft_putendl(list->name);
 		list = list->next;
 	}
-	BN
+
 }
 
 void	add_listent(t_listent **begin, t_dirent *curr_ent)
 {
 	t_listent	*l;
 	t_listent	*new;
+	int			find;
 
 // les placer dans ordre ASCII name
+	ft_printf("%s\n", curr_ent->d_name);
 	if (*begin)
 	{
+		find = 0;
 		l = *begin;
 		while (l->next)
 		{
-			if (ft_strcmp(l->next->name, curr_ent->d_name) >= 0)
+			if (ft_strcmp(l->name, curr_ent->d_name) >= 0)
+			{
+				find++;
 				break;
+			}
 			l = l->next;
 		}
 		new = new_listent(curr_ent);
-		new->back = l;
-		new->next = l->next;
-		l->next = new;
+		if (!find)
+		{
+			l->next = new;
+			new->back = l;
+		}
+		else
+		{
+			new->back = l->back;
+			new->next = l;
+			if (l->back)
+				l->back->next = new;
+			l->back = new;
+		}
+		if (!new->back)
+			*begin = new;
 	}
 	else
+	{
 		*begin = new_listent(curr_ent);
+		(*begin)->end = *begin;
+	}
+//	display_list(*begin);
 }
 
 void	free_listent(t_listent **begin)

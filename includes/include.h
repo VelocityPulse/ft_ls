@@ -6,7 +6,7 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 12:42:29 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/20 13:37:37 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/20 15:20:51 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct	s_listent
 	int					type;
 	struct s_listent	*next;
 	struct s_listent	*back;
+	struct s_listent	*end;
 }				t_listent;
 
 typedef struct	s_ls
