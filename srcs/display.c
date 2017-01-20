@@ -6,7 +6,7 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 06:16:24 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/19 16:05:31 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/20 14:46:24 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,8 @@ void	recursive(t_ls *data, char *path)
 		while ((curr_ent = readdir(curr_dir)))
 			if (data->flag_a ||
 					(!data->flag_a && ft_strncmp(curr_ent->d_name, ".", 1)))
-			{
 				add_listent(&list_ent, curr_ent);
-				ft_putendl(curr_ent->d_name);
-			}
+		display_list(list_ent); //temporaire
 		// display le tout
 		tmp = list_ent;
 		while (tmp)
@@ -71,6 +69,7 @@ void	recursive(t_ls *data, char *path)
 					// obligatoire pour pas avoir de boucle infini
 				{
 						join = ft_strjoin_dir(path, tmp->name);
+						exit(1);
 						ft_printf("\n%s:\n", join);
 						recursive(data, join);
 						ft_memdel((void **)&join);
