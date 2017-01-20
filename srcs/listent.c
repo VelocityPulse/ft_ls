@@ -6,7 +6,7 @@
 /*   By: cchameyr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 18:39:50 by cchameyr          #+#    #+#             */
-/*   Updated: 2017/01/20 17:24:42 by cchameyr         ###   ########.fr       */
+/*   Updated: 2017/01/20 18:16:11 by cchameyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,25 @@ static t_listent	*new_listent(t_dirent *curr_entry)
 	list->name = ft_strdup(curr_entry->d_name);
 	list->next = NULL;
 	list->back = NULL;
+	list->end = list;
 	return (list);
 }
 
-void	display_list(t_listent *list)
+static void			make_sorting_listent(int find, t_listent *new, t_listent *l)
 {
-	while (list)
+	if (!find)
 	{
-//		ft_printf("%s->", list->name);
-		ft_putendl(list->name);
-		list = list->next;
+		l->next = new;
+		new->back = l;
 	}
-
+	else
+	{
+		new->back = l->back;
+		new->next = l;
+		if (l->back)
+			l->back->next = new;
+		l->back = new;
+	}
 }
 
 void	add_listent(t_listent **begin, t_dirent *curr_ent)
@@ -41,11 +48,8 @@ void	add_listent(t_listent **begin, t_dirent *curr_ent)
 	t_listent	*new;
 	int			find;
 
-// les placer dans ordre ASCII name
-	ft_printf("%s\n", curr_ent->d_name);
-	if (*begin)
+	if (*begin && !(find = 0))
 	{
-		find = 0;
 		l = *begin;
 		while (l->next)
 		{
@@ -57,28 +61,12 @@ void	add_listent(t_listent **begin, t_dirent *curr_ent)
 			l = l->next;
 		}
 		new = new_listent(curr_ent);
-		if (!find)
-		{
-			l->next = new;
-			new->back = l;
-		}
-		else
-		{
-			new->back = l->back;
-			new->next = l;
-			if (l->back)
-				l->back->next = new;
-			l->back = new;
-		}
-		if (!new->back)
-			*begin = new;
+		make_sorting_listent(find, new, l);
+		*begin = (new->back == 0 ? new : *begin);
+		(*begin)->end = (new->next == 0 ? new : (*begin)->end);
 	}
 	else
-	{
 		*begin = new_listent(curr_ent);
-		(*begin)->end = *begin;
-	}
-//	display_list(*begin);
 }
 
 void	free_listent(t_listent **begin)
@@ -97,4 +85,13 @@ void	free_listent(t_listent **begin)
 		}
 	}
 	*begin = NULL;
+}
+
+void	display_list(t_listent *list)
+{
+	while (list)
+	{
+		ft_putendl(list->name);
+		list = list->next;
+	}
 }
